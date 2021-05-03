@@ -1,5 +1,7 @@
 # Django
 
+To run the CODECOV you need to create an account, link your repository and add the TOKEN in github actions environment.
+
 ## Launch App
 
 ```
