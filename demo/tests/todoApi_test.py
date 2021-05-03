@@ -1,6 +1,7 @@
-import factory
 import json
 from datetime import datetime
+
+import factory
 from django.core import management
 from django.test import TestCase
 from django.urls import reverse
@@ -12,6 +13,7 @@ from ..models import Todo
 from .factories import TodoFactory
 
 faker = Factory.create()
+
 
 class TodoApi_Test(TestCase):
     def setUp(self):
@@ -42,7 +44,7 @@ class TodoApi_Test(TestCase):
         todo_detail_url = reverse('todo_api-detail', kwargs={'pk': todo_pk})
         response = client.get(todo_detail_url)
         assert response.status_code == status.HTTP_200_OK
-    
+
     def test_fetch_all(self):
         """
         Create 3 objects, do a fetch all call and check if you get back 3 objects
@@ -83,7 +85,7 @@ class TodoApi_Test(TestCase):
         assert todo_dict['date'] == response.data['date'].replace('Z', '+00:00')
         assert todo_dict['text'] == response.data['text']
         assert todo_dict['done'] == response.data['done']
-    
+
     def test_update_id_with_incorrect_value_data_type(self):
         client = self.api_client
         todo = Todo.objects.first()
@@ -131,5 +133,3 @@ class TodoApi_Test(TestCase):
         response = client.patch(todo_detail_url, data=data)
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert todo_text == Todo.objects.first().text
-
-

@@ -1,11 +1,15 @@
-import factory
 from datetime import datetime
+
+import factory
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework import serializers
 from rest_framework.test import APIRequestFactory
-from .factories import TodoFactory
+
 from demo.serializers import TodoSerializer
+
+from .factories import TodoFactory
+
 
 class TodoSerializer_Test(TestCase):
     def setUp(self):
@@ -21,5 +25,3 @@ class TodoSerializer_Test(TestCase):
         assert serialized_todo['date'] == todo.date
         assert serialized_todo['text'] == todo.text
         assert serialized_todo['done'] == todo.done
-
-
